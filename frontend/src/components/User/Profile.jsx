@@ -2,16 +2,15 @@ import React, { Fragment, useEffect } from "react";
 import { useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader/Loader";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Profile.css";
 
-const Profile = () => {
+const Profile = ({ history }) => {
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (isAuthenticated === false) {
-      navigate("/login");
+      history.push("/login");
     }
   }, [history, isAuthenticated]);
   return (
@@ -40,6 +39,7 @@ const Profile = () => {
                 <h4>Joined On</h4>
                 <p>{String(user.createdAt).substr(0, 10)}</p>
               </div>
+
               <div>
                 <Link to="/orders">My Orders</Link>
                 <Link to="/password/update">Change Password</Link>

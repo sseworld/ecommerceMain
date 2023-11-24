@@ -27,7 +27,7 @@ const Home = () => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title="SSE Ecommerce" />
+          <MetaData title="ECOMMERCE" />
 
           <div className="banner">
             <p>Welcome to Ecommerce</p>
@@ -41,6 +41,7 @@ const Home = () => {
           </div>
 
           <h2 className="homeHeading">Featured Products</h2>
+
           <div className="container" id="container">
             {products &&
               products.map((product) => (

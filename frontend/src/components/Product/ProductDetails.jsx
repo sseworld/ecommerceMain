@@ -27,7 +27,7 @@ const ProductDetails = ({ match }) => {
   const alert = useAlert();
 
   const { product, loading, error } = useSelector(
-    (state) => state.ProductDetails
+    (state) => state.productDetails
   );
 
   const { success, error: reviewError } = useSelector(
@@ -48,12 +48,14 @@ const ProductDetails = ({ match }) => {
 
   const increaseQuantity = () => {
     if (product.Stock <= quantity) return;
+
     const qty = quantity + 1;
     setQuantity(qty);
   };
 
   const decreaseQuantity = () => {
     if (1 >= quantity) return;
+
     const qty = quantity - 1;
     setQuantity(qty);
   };
@@ -69,10 +71,13 @@ const ProductDetails = ({ match }) => {
 
   const reviewSubmitHandler = () => {
     const myForm = new FormData();
+
     myForm.set("rating", rating);
     myForm.set("comment", comment);
     myForm.set("productId", match.params.id);
+
     dispatch(newReview(myForm));
+
     setOpen(false);
   };
 
@@ -97,9 +102,7 @@ const ProductDetails = ({ match }) => {
   return (
     <Fragment>
       {loading ? (
-        <Fragment>
-          <Loader />
-        </Fragment>
+        <Loader />
       ) : (
         <Fragment>
           <MetaData title={`${product.name} -- ECOMMERCE`} />
@@ -123,14 +126,13 @@ const ProductDetails = ({ match }) => {
                 <h2>{product.name}</h2>
                 <p>Product # {product._id}</p>
               </div>
-
               <div className="detailsBlock-2">
                 <Rating {...options} />
                 <span className="detailsBlock-2-span">
+                  {" "}
                   ({product.numOfReviews} Reviews)
                 </span>
               </div>
-
               <div className="detailsBlock-3">
                 <h1>{`₹${product.price}`}</h1>
                 <div className="detailsBlock-3-1">
@@ -166,6 +168,7 @@ const ProductDetails = ({ match }) => {
           </div>
 
           <h3 className="reviewsHeading">REVIEWS</h3>
+
           <Dialog
             aria-labelledby="simple-dialog-title"
             open={open}

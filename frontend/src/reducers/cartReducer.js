@@ -11,9 +11,11 @@ export const cartReducer = (
   switch (action.type) {
     case ADD_TO_CART:
       const item = action.payload;
+
       const isItemExist = state.cartItems.find(
         (i) => i.product === item.product
       );
+
       if (isItemExist) {
         return {
           ...state,
@@ -33,6 +35,7 @@ export const cartReducer = (
         ...state,
         cartItems: state.cartItems.filter((i) => i.product !== action.payload),
       };
+
     case SAVE_SHIPPING_INFO:
       return {
         ...state,

@@ -1,25 +1,25 @@
 import {
-  ALL_ORDERS_FAIL,
-  ALL_ORDERS_REQUEST,
-  ALL_ORDERS_SUCCESS,
-  CLEAR_ERRORS,
-  CREATE_ORDER_FAIL,
   CREATE_ORDER_REQUEST,
   CREATE_ORDER_SUCCESS,
-  DELETE_ORDER_FAIL,
-  DELETE_ORDER_REQUEST,
-  DELETE_ORDER_RESET,
-  DELETE_ORDER_SUCCESS,
-  MY_ORDERS_FAIL,
+  CREATE_ORDER_FAIL,
   MY_ORDERS_REQUEST,
   MY_ORDERS_SUCCESS,
-  ORDER_DETAILS_FAIL,
+  MY_ORDERS_FAIL,
+  ALL_ORDERS_REQUEST,
+  ALL_ORDERS_SUCCESS,
+  ALL_ORDERS_FAIL,
+  UPDATE_ORDER_REQUEST,
+  UPDATE_ORDER_SUCCESS,
+  UPDATE_ORDER_FAIL,
+  UPDATE_ORDER_RESET,
+  DELETE_ORDER_REQUEST,
+  DELETE_ORDER_SUCCESS,
+  DELETE_ORDER_FAIL,
+  DELETE_ORDER_RESET,
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_SUCCESS,
-  UPDATE_ORDER_FAIL,
-  UPDATE_ORDER_REQUEST,
-  UPDATE_ORDER_RESET,
-  UPDATE_ORDER_SUCCESS,
+  ORDER_DETAILS_FAIL,
+  CLEAR_ERRORS,
 } from "../constants/orderConstants";
 
 export const newOrderReducer = (state = {}, action) => {
@@ -41,7 +41,6 @@ export const newOrderReducer = (state = {}, action) => {
         loading: false,
         error: action.payload,
       };
-
     case CLEAR_ERRORS:
       return {
         ...state,
@@ -68,10 +67,9 @@ export const myOrdersReducer = (state = { orders: [] }, action) => {
 
     case MY_ORDERS_FAIL:
       return {
-        ...state,
-        error: null,
+        loading: false,
+        error: action.payload,
       };
-
     case CLEAR_ERRORS:
       return {
         ...state,

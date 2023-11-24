@@ -9,7 +9,6 @@ import Slider from "@material-ui/core/Slider";
 import { useAlert } from "react-alert";
 import Typography from "@material-ui/core/Typography";
 import MetaData from "../layout/MetaData";
-import { useParams } from "react-router-dom";
 
 const categories = [
   "Laptop",
@@ -21,14 +20,16 @@ const categories = [
   "SmartPhones",
 ];
 
-const Products = () => {
+const Products = ({ match }) => {
   const dispatch = useDispatch();
+
   const alert = useAlert();
+
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 25000]);
   const [category, setCategory] = useState("");
+
   const [ratings, setRatings] = useState(0);
-  const { keyword } = useParams()
 
   const {
     products,
@@ -39,24 +40,25 @@ const Products = () => {
     filteredProductsCount,
   } = useSelector((state) => state.products);
 
-  console.log(keyword)
-  
+  const keyword = match.params.keyword;
+
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
   };
+
   const priceHandler = (event, newPrice) => {
     setPrice(newPrice);
   };
   let count = filteredProductsCount;
 
-  // useEffect(() => {
-  //   if (error) {
-  //     alert.error(error);
-  //     dispatch(clearErrors());
-  //   }
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
 
-  //   dispatch(getProduct(keyword, currentPage, price, category, ratings));
-  // }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
+    dispatch(getProduct(keyword, currentPage, price, category, ratings));
+  }, [dispatch, keyword, currentPage, price, category, ratings, alert, error]);
 
   return (
     <Fragment>
@@ -82,7 +84,7 @@ const Products = () => {
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
               min={0}
-              max={2500}
+              max={25000}
             />
 
             <Typography>Categories</Typography>
@@ -136,4 +138,4 @@ const Products = () => {
   );
 };
 
-export default Products
+export default Products;

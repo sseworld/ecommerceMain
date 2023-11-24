@@ -12,9 +12,8 @@ import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import SideBar from "./Sidebar";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
-import { useNavigate } from "react-router-dom";
 
-const NewProduct = () => {
+const NewProduct = ({ history }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
@@ -27,7 +26,6 @@ const NewProduct = () => {
   const [Stock, setStock] = useState(0);
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
-  const navigate = useNavigate();
 
   const categories = [
     "Laptop",
@@ -47,10 +45,10 @@ const NewProduct = () => {
 
     if (success) {
       alert.success("Product Created Successfully");
-      navigate("/admin/dashboard");
+      history.push("/admin/dashboard");
       dispatch({ type: NEW_PRODUCT_RESET });
     }
-  }, [dispatch, alert, error, success]);
+  }, [dispatch, alert, error, history, success]);
 
   const createProductSubmitHandler = (e) => {
     e.preventDefault();

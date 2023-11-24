@@ -15,7 +15,6 @@ import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import SideBar from "./Sidebar";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
-import { useNavigate } from "react-router-dom";
 
 const UpdateProduct = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -37,7 +36,6 @@ const UpdateProduct = ({ history, match }) => {
   const [images, setImages] = useState([]);
   const [oldImages, setOldImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
-  const navigate = useNavigate();
 
   const categories = [
     "Laptop",
@@ -74,7 +72,7 @@ const UpdateProduct = ({ history, match }) => {
 
     if (isUpdated) {
       alert.success("Product Updated Successfully");
-      navigate("/admin/products");
+      history.push("/admin/products");
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }
   }, [

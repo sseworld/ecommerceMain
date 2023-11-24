@@ -18,8 +18,8 @@ import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
 
 const ProductList = ({ history }) => {
   const dispatch = useDispatch();
+
   const alert = useAlert();
-  const navigate = useNavigate();
 
   const { error, products } = useSelector((state) => state.products);
 
@@ -44,7 +44,7 @@ const ProductList = ({ history }) => {
 
     if (isDeleted) {
       alert.success("Product Deleted Successfully");
-      navigate("/admin/dashboard");
+      history.push("/admin/dashboard");
       dispatch({ type: DELETE_PRODUCT_RESET });
     }
 

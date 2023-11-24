@@ -6,9 +6,8 @@ import "./ConfirmOrder.css";
 import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 
-const ConfirmOrder = () => {
+const ConfirmOrder = ({ history }) => {
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
-  const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
 
   const subtotal = cartItems.reduce(
@@ -17,8 +16,11 @@ const ConfirmOrder = () => {
   );
 
   const shippingCharges = subtotal > 1000 ? 0 : 200;
+
   const tax = subtotal * 0.18;
+
   const totalPrice = subtotal + tax + shippingCharges;
+
   const address = `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state}, ${shippingInfo.pinCode}, ${shippingInfo.country}`;
 
   const proceedToPayment = () => {
@@ -31,7 +33,7 @@ const ConfirmOrder = () => {
 
     sessionStorage.setItem("orderInfo", JSON.stringify(data));
 
-    navigate("/process/payment");
+    history.push("/process/payment");
   };
 
   return (
